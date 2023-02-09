@@ -10,31 +10,31 @@ public class MyArrayList <T>  {
 
     public MyArrayList() {
         arrList = new Object [DEFAULT_CAPACITY];
-
+        size = 0;
     }
 
-    public boolean add(T value) {
-        int freeSlot = -1;
+    public void add(T value) {
         for (int i = 0; i < arrList.length; i++) {
-            if (arrList[i] == null) {
-                freeSlot = i;
+            if (size < arrList.length) {
+                arrList[size] = value;
+                size++;
                 break;
             }
         }
-        if(freeSlot != -1){
-            arrList[freeSlot] = value;
-        } else {
-            arrList = Arrays.copyOf(arrList, arrList.length * 2);
-            add(value);
+        if (size == arrList.length){
+                arrList = Arrays.copyOf(arrList, arrList.length * 2);
+                arrList[size] = value;
+                size++;
+            }
         }
-        return true;
-    }
 
-    public T remove(int index) {
+    public T remove(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
         T removedEl = (T) arrList[index];
         for (int i = index + 1; i < arrList.length; i++) {
             removedEl = null;
-            Objects.checkIndex(index, size());
             System.arraycopy(arrList, index + 1, arrList, index, arrList.length - index - 1);
             break;
         }
@@ -42,22 +42,27 @@ public class MyArrayList <T>  {
     }
 
     public void clear() {
-        Arrays.fill(arrList, null);
+        arrList = new Object [DEFAULT_CAPACITY];
+        size = 0;
     }
 
     public int size() {
-        int count = 0;
-        for (Object o : arrList)
-            if (o != null) {
-                count++;
-                size = count;
-            }
         return size;
     }
 
-    public T get(int index) {
-        Objects.checkIndex(index, size());
+    public T get(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
         return (T) arrList[index];
+    }
+
+    @Override
+    public String toString() {
+        if (arrList == null) {
+            return " ";
+        }
+        return Arrays.toString(arrList);
     }
 
 }
