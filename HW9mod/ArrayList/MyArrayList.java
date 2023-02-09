@@ -7,7 +7,6 @@ public class MyArrayList <T>  {
     transient Object[] arrList;
     private static final int DEFAULT_CAPACITY = 10;
     private int size;
-    private int index;
 
     public MyArrayList() {
         arrList = new Object [DEFAULT_CAPACITY];
