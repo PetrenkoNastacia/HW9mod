@@ -57,12 +57,6 @@ public class MyArrayList <T>  {
         return (T) arrList[index];
     }
 
-    @Override
-    public String toString() {
-        if (arrList == null) {
-            return " ";
-        }
-        return Arrays.toString(arrList);
-    }
+  
 
 }
