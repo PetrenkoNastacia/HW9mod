@@ -1,8 +1,5 @@
 package HW9mod.ArrayList;
 
-import java.util.Arrays;
-import java.util.Objects;
-
 public class MyArrayList <T>  {
     transient Object[] arrList;
     private static final int DEFAULT_CAPACITY = 10;
@@ -14,31 +11,22 @@ public class MyArrayList <T>  {
     }
 
     public void add(T value) {
-        for (int i = 0; i < arrList.length; i++) {
-            if (size < arrList.length) {
-                arrList[size] = value;
-                size++;
-                break;
-            }
+        if (size == arrList.length) {
+            Object[] newArrList = new Object[arrList.length * 2];
+            System.arraycopy(arrList, 0, newArrList, 0, arrList.length);
+            arrList = newArrList;
         }
-        if (size == arrList.length){
-                arrList = Arrays.copyOf(arrList, arrList.length * 2);
-                arrList[size] = value;
-                size++;
-            }
-        }
+        arrList[size++] = value;
+    }
 
     public T remove(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        T removedEl = (T) arrList[index];
-        for (int i = index + 1; i < arrList.length; i++) {
-            removedEl = null;
-            System.arraycopy(arrList, index + 1, arrList, index, arrList.length - index - 1);
-            break;
-        }
-        return removedEl;
+        T removedVal = (T) arrList[index];
+        System.arraycopy(arrList, index + 1, arrList, index, size - index - 1);
+        size--;
+        return removedVal;
     }
 
     public void clear() {
@@ -55,14 +43,6 @@ public class MyArrayList <T>  {
             throw new IndexOutOfBoundsException();
         }
         return (T) arrList[index];
-    }
-
-    @Override
-    public String toString() {
-        if (arrList == null) {
-            return " ";
-        }
-        return Arrays.toString(arrList);
     }
 
 }
