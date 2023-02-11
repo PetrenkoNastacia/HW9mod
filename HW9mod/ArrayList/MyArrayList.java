@@ -1,9 +1,12 @@
 package HW9mod.ArrayList;
 
+import java.util.Arrays;
+
 public class MyArrayList <T>  {
     transient Object[] arrList;
     private static final int DEFAULT_CAPACITY = 10;
     private int size;
+    int index;
 
     public MyArrayList() {
         arrList = new Object [DEFAULT_CAPACITY];
@@ -44,5 +47,14 @@ public class MyArrayList <T>  {
         }
         return (T) arrList[index];
     }
-    
+
+    @Override
+    public String toString() {
+        if (arrList[index] == null) {
+            return " ";
+        }
+        Object[] arrListToConsole = Arrays.copyOf(arrList, size);
+        return Arrays.toString(arrListToConsole);
+    }
+
 }

@@ -27,12 +27,17 @@ public class MyStack <T> {
     }
 
     public T peek(){
-         return stack.get(0);
+         return stack.get(size()-1);
     }
 
     public T pop() {
         peek();
-        return remove(0);
+        return remove(size()-1);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(stack);
     }
 
 }
