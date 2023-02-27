@@ -1,5 +1,7 @@
 package HW9mod.LinkedList;
 
+import java.util.Objects;
+
 public class MyLinkedList<T> {
 
     static class Node<T> {
